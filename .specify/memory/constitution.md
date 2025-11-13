@@ -1,50 +1,58 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+Version change: NEW → 1.0.0 (initial constitution creation)
+Added sections: All core principles established based on project documentation
+Added principles:
+- I. Code Quality & Standards (from coding-guidelines.md)
+- II. Test-Driven Development (from testing-guidelines.md) 
+- III. User-Centered Design (from functional-requirements.md and ui-guidelines.md)
+- IV. Maintainability & Documentation (from coding-guidelines.md)
+- V. Incremental Development (from various docs)
+Templates requiring updates: ⚠ All templates need validation against new constitution
+Follow-up TODOs: Validate template alignment in subsequent update cycle
+-->
+
+# Todo App Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Code Quality & Standards
+All code MUST follow established formatting and naming conventions including 2-space indentation, camelCase for variables/functions, PascalCase for components, and UPPER_SNAKE_CASE for constants. Import organization is mandatory with external libraries first, internal modules second, and styles third. ESLint rules MUST be followed with zero linting errors before code review. DRY (Don't Repeat Yourself) principles are enforced - duplicate code MUST be extracted into shared utilities or components.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+Rationale: Consistent code style reduces cognitive load, improves team collaboration, and makes the codebase more maintainable as it scales.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### II. Test-Driven Development (NON-NEGOTIABLE)
+Tests MUST be written before or alongside implementation for all new functionality. Target 80%+ code coverage across all packages with 100% coverage for critical user workflows. Unit tests for components/functions, integration tests for API communication, and comprehensive error handling tests are mandatory. All tests MUST pass before merging any pull request.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+Rationale: TDD ensures code quality, catches regressions early, and serves as living documentation of expected behavior.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### III. User-Centered Design
+All features MUST be designed with user experience as the primary consideration. UI MUST follow the established design system with consistent spacing (8px grid), typography, and color palette. Features MUST be simple and focused - avoid feature bloat and premature optimization. Accessibility requirements (WCAG AA standards) are mandatory for all interactive elements.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+Rationale: User-centered design ensures the application delivers real value and remains usable as complexity grows.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### IV. Maintainability & Documentation
+Functions and components MUST have single responsibility. Error handling is mandatory for all operations that can fail with meaningful error messages. Code MUST be self-documenting with clear names - comments should explain "why" not "what". JSDoc is required for public functions and complex components.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+Rationale: Well-maintained code reduces technical debt and enables faster feature development over time.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### V. Incremental Development
+Features MUST be implemented in small, independently testable increments. Each commit MUST represent one logical change with clear, descriptive messages. Feature branches are mandatory for new work with pull requests required for code review. No feature should require "big bang" releases.
+
+Rationale: Incremental development reduces risk, enables faster feedback cycles, and allows for easier rollbacks when issues arise.
+
+## Technology Standards
+
+React applications MUST use functional components with hooks. Express.js APIs MUST follow RESTful conventions with proper HTTP status codes. All dependencies MUST be kept current within major version constraints. No console.log statements in production code - use proper logging mechanisms.
+
+## Development Workflow
+
+All changes MUST go through pull request review process. Code review MUST verify compliance with all constitution principles. Branch naming convention: feature/description, bugfix/description. Commit messages MUST follow conventional commit format when possible.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes all other development practices and guidelines. All pull requests MUST be reviewed for compliance with constitutional principles before approval. Amendments to this constitution require documentation of the change rationale, team approval, and an updated migration plan for existing code.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+Constitution compliance is verified during code review. Any deviation from principles MUST be explicitly justified and documented. For runtime development guidance, refer to documentation in the `docs/` directory which provides detailed implementation guidance for these constitutional principles.
+
+**Version**: 1.0.0 | **Ratified**: 2025-11-13 | **Last Amended**: 2025-11-13

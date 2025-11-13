@@ -31,7 +31,11 @@
 
 *GATE: Must pass before Phase 0 research. Re-check after Phase 1 design.*
 
-[Gates determined based on constitution file]
+- [ ] **Code Quality & Standards**: Feature design follows established naming conventions and code organization patterns
+- [ ] **Test-Driven Development**: Test strategy defined with target coverage identified
+- [ ] **User-Centered Design**: User experience considerations documented and accessibility requirements addressed  
+- [ ] **Maintainability & Documentation**: Single responsibility principle applied, error handling planned
+- [ ] **Incremental Development**: Feature broken into independently testable increments
 
 ## Project Structure
 
