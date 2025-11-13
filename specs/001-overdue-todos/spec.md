@@ -11,6 +11,8 @@
 
 - Q: What specific visual styling should be used for overdue todos? → A: Red text color + warning icon + light red background
 - Q: When does a todo due today become overdue (midnight boundary behavior)? → A: A todo due today is NOT overdue until midnight (when date changes to tomorrow)
+- Q: How should the system dynamically update overdue status? → A: Update on user action - status recalculates when user views/interacts with list
+- Q: Should the overdue badge be displayed when count is zero? → A: Hide badge entirely when count is zero (only show when overdue items exist)
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -56,7 +58,7 @@ Users see a count or badge indicating the total number of overdue todos in their
 **Acceptance Scenarios**:
 
 1. **Given** 3 incomplete todos with past due dates and 2 incomplete todos with future due dates, **When** the user views the todo list, **Then** an overdue count/badge displays "3"
-2. **Given** no incomplete todos with past due dates, **When** the user views the todo list, **Then** no overdue count/badge is displayed OR the count shows "0"
+2. **Given** no incomplete todos with past due dates, **When** the user views the todo list, **Then** no overdue count/badge is displayed
 3. **Given** completed todos with past due dates, **When** the user views the todo list, **Then** these completed items are NOT included in the overdue count
 
 ---
@@ -83,7 +85,7 @@ Users can optionally sort or filter their todo list to show overdue items at the
 - System uses user's local timezone for date calculations; timezone differences are handled by the browser/system
 - If user's system clock is incorrect, overdue calculations reflect the system's current date (garbage in, garbage out)
 - When user opens app after being offline, overdue status is calculated fresh based on current date at that moment
-- If a todo becomes overdue while user is viewing the list, the status updates dynamically based on FR-006
+- If a todo becomes overdue while user is viewing the list without interaction, it will not update until the next user action (view refresh, interaction); no real-time polling required
 
 ## Requirements *(mandatory)*
 
@@ -94,7 +96,7 @@ Users can optionally sort or filter their todo list to show overdue items at the
 - **FR-003**: System MUST NOT apply overdue status to completed todos, regardless of their due date
 - **FR-004**: System MUST NOT apply overdue status to todos without a due date
 - **FR-005**: System MUST display overdue todos with red text color, a warning icon, and a light red background to differentiate them from non-overdue items
-- **FR-006**: System MUST update overdue status dynamically as dates change (e.g., a todo due today becomes overdue tomorrow)
+- **FR-006**: System MUST recalculate and update overdue status when the user views or interacts with the todo list (e.g., loading the page, completing a todo, adding a new todo)
 - **FR-007**: System MUST calculate overdue status based on the user's current date at viewing time
 - **FR-008**: System MUST include an overdue count or badge showing the number of overdue incomplete todos
 - **FR-009**: System MUST support sorting or filtering todos to prioritize overdue items (optional enhancement, Priority P3)
