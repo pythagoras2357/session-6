@@ -5,6 +5,13 @@
 **Status**: Draft  
 **Input**: User description: "Support for Overdue Todo Items - Users need a clear, visual way to identify which todos have not been completed by their due date. This helps users quickly spot overdue items without having to manually check dates against today's date."
 
+## Clarifications
+
+### Session 2025-11-13
+
+- Q: What specific visual styling should be used for overdue todos? → A: Red text color + warning icon + light red background
+- Q: When does a todo due today become overdue (midnight boundary behavior)? → A: A todo due today is NOT overdue until midnight (when date changes to tomorrow)
+
 ## User Scenarios & Testing *(mandatory)*
 
 <!--
@@ -30,7 +37,7 @@ Users view their todo list and immediately see which tasks are overdue through d
 
 **Acceptance Scenarios**:
 
-1. **Given** a todo with a due date in the past and status incomplete, **When** the user views the todo list, **Then** the todo is displayed with overdue visual styling (e.g., red text, warning icon, or other distinct indicator)
+1. **Given** a todo with a due date in the past and status incomplete, **When** the user views the todo list, **Then** the todo is displayed with red text color, a warning icon, and a light red background
 2. **Given** a todo with a due date of today and status incomplete, **When** the user views the todo list, **Then** the todo is NOT displayed with overdue styling
 3. **Given** a todo with a due date in the future and status incomplete, **When** the user views the todo list, **Then** the todo is NOT displayed with overdue styling
 4. **Given** a todo with a due date in the past and status complete, **When** the user views the todo list, **Then** the todo is NOT displayed with overdue styling (completed items cannot be overdue)
@@ -72,21 +79,21 @@ Users can optionally sort or filter their todo list to show overdue items at the
 
 ### Edge Cases
 
-- What happens when a todo's due date is today but the time has passed (midnight boundary)?
-- How does the system handle timezone differences for due date calculations?
-- What happens when the user's system clock is incorrect or changes (e.g., daylight saving time)?
-- How are overdue todos displayed when the user first opens the app after being offline for several days?
-- What happens if a todo becomes overdue while the user is actively viewing the list?
+- A todo with due date of today remains NOT overdue until midnight when the date changes to tomorrow (date-only comparison, no intraday time consideration)
+- System uses user's local timezone for date calculations; timezone differences are handled by the browser/system
+- If user's system clock is incorrect, overdue calculations reflect the system's current date (garbage in, garbage out)
+- When user opens app after being offline, overdue status is calculated fresh based on current date at that moment
+- If a todo becomes overdue while user is viewing the list, the status updates dynamically based on FR-006
 
 ## Requirements *(mandatory)*
 
 ### Functional Requirements
 
-- **FR-001**: System MUST calculate overdue status by comparing the todo's due date to the current date (date only, not time)
+- **FR-001**: System MUST calculate overdue status by comparing the todo's due date to the current date (date only, not time); a todo due today is NOT overdue until the date changes to tomorrow at midnight
 - **FR-002**: System MUST apply overdue status only to incomplete todos with due dates in the past
 - **FR-003**: System MUST NOT apply overdue status to completed todos, regardless of their due date
 - **FR-004**: System MUST NOT apply overdue status to todos without a due date
-- **FR-005**: System MUST display overdue todos with distinct visual styling that differentiates them from non-overdue items
+- **FR-005**: System MUST display overdue todos with red text color, a warning icon, and a light red background to differentiate them from non-overdue items
 - **FR-006**: System MUST update overdue status dynamically as dates change (e.g., a todo due today becomes overdue tomorrow)
 - **FR-007**: System MUST calculate overdue status based on the user's current date at viewing time
 - **FR-008**: System MUST include an overdue count or badge showing the number of overdue incomplete todos
