@@ -51,3 +51,20 @@
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
 }
+
+/* Overdue Todo Styling */
+.overdue {
+  color: var(--danger-color);
+  background-color: rgba(198, 40, 40, 0.1); /* Light red background */
+  border-left: 4px solid var(--danger-color);
+}
+
+.overdue-badge {
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: white;
+  padding: 4px 12px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 12px;
+}
